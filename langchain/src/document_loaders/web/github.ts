@@ -45,7 +45,7 @@ export class GithubRepoLoader
 
   private readonly initialPath: string;
 
-  private headers: Record<string, string> = {};
+  private headers: Headers;
 
   public branch: string;
 
@@ -80,10 +80,9 @@ export class GithubRepoLoader
     this.unknown = unknown;
     this.accessToken = accessToken;
     this.ignoreFiles = ignoreFiles;
+    this.headers.set("User-Agent", "Langchain.js");
     if (this.accessToken) {
-      this.headers = {
-        Authorization: `Bearer ${this.accessToken}`,
-      };
+      this.headers.set("Authorization", `Bearer ${this.accessToken}`);
     }
   }
 
